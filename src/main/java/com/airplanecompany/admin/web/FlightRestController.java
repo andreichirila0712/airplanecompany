@@ -27,7 +27,7 @@ public class FlightRestController {
         flightService.removeFlight(flightId);
     }
 
-    @PostMapping("")
+    @PostMapping()
     public FlightDTO saveFlight(@RequestBody FlightDTO flightDTO) {
         return flightService.createFlight(flightDTO);
     }
