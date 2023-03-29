@@ -4,8 +4,10 @@ import com.airplanecompany.admin.dao.RoleDao;
 import com.airplanecompany.admin.dao.UserDao;
 import com.airplanecompany.admin.entity.Role;
 import com.airplanecompany.admin.entity.User;
+import com.airplanecompany.admin.service.PassengerService;
 import com.airplanecompany.admin.service.UserService;
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,10 +16,12 @@ public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
     private RoleDao roleDao;
+    private PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.roleDao = roleDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -27,7 +31,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(String email, String password) {
-        return userDao.save(new User(email, password));
+        String encodedPassword = passwordEncoder.encode(password);
+        return userDao.save(new User(email, encodedPassword));
     }
 
     @Override
