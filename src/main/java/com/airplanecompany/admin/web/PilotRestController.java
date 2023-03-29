@@ -47,6 +47,7 @@ public class PilotRestController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('Admin')")
     public PilotDTO savePilot(@RequestBody PilotDTO pilotDTO) {
         User user = userService.loadUserByEmail(pilotDTO.getUserDTO().getEmail());
         if (user != null) throw new RuntimeException("Email Already Exist");

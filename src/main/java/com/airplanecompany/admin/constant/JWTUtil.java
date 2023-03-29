@@ -2,7 +2,7 @@ package com.airplanecompany.admin.constant;
 
 public class JWTUtil {
 
-    public static final long EXPIRE_ACCESS_TOKEN = 5 * 60 * 1000;
+    public static final long EXPIRE_ACCESS_TOKEN = 1 * 60 * 1000;
 
     public static final String ISSUER="springBootApp";
 
